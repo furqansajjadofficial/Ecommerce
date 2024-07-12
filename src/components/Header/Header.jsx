@@ -17,7 +17,7 @@ function Header() {
 
   const handleTheme = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
-    darkMode? alert("Drk Mode Enabled") : alert("Light Mode Enabled")
+    darkMode? alert("Dark Mode Enabled") : alert("Light Mode Enabled")
   };
   const toggleManue = () => {
     setshowManue(!showManue)
