@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { useState, useId } from "react";
 import Logo from "../../assets/Logo.png";
 import Light from "../../assets/Light.png";
@@ -14,10 +14,10 @@ function Header() {
     const [showManue , setshowManue] = useState(false)
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.logined);
+  const id = useId()
 
   const handleTheme = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
-    darkMode? alert("Dark Mode Enabled") : alert("Light Mode Enabled")
   };
   const toggleManue = () => {
     setshowManue(!showManue)
@@ -35,7 +35,7 @@ function Header() {
   useEffect(() => {
     document.querySelector("html").classList.remove("light", "dark");
     document.querySelector("html").classList.add(darkMode ? "light" : "dark");
-    dispatch(toggleTheme);
+    dispatch(toggleTheme());
   }, [darkMode]);
 
   const navItems = [
@@ -55,12 +55,12 @@ function Header() {
   ];
 
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b-2 border-gray-200 dark:border-gray-600">
+    <nav className="bg-white dark:bg-gray-900  w-full  start-0 border-b-2 border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src={Logo} className="h-8" alt="Flowbite Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
+            Universal Finds Hub
           </span>
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
@@ -150,7 +150,7 @@ function Header() {
             <>
             <li
               className="w-full"
-              key={item.slug}
+              key={id}
             >
               <NavLink
                 to={item.slug}
