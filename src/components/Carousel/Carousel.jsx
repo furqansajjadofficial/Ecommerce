@@ -50,11 +50,11 @@ function Carousel() {
           ></div>
         ))}
       </div>
-      <div className="w-[95%] justify-between absolute bottom-64 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        <button className="dark:text-white text-4xl" onClick={handlePrev}>
+      <div className="w-[95%] justify-between absolute md:bottom-64 bottom-44 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <button className="dark:text-white md:text-4xl text-2xl" onClick={handlePrev}>
         <FaArrowLeft />
         </button>
-        <button className="dark:text-white text-4xl" onClick={handleNext}>
+        <button className="dark:text-white md:text-4xl text-2xl" onClick={handleNext}>
         <FaArrowRight />
         </button>
       </div>
