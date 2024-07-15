@@ -1,23 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    currentCarousel : 0,
-    totalCarousels : 4
-}
+    currentCarousel: 0,
+    totalCarousels: 4 
+};
 
 const carouselSlice = createSlice({
-    name : 'carousel',
+    name: 'carousel',
     initialState,
-    reducers : {
-        nextSlide : (state , action) =>{
-            state.currentCarousel = action.payload > state.totalCarousels ? 0 : action.payload
+    reducers: {
+        nextSlide: (state) => {
+            state.currentCarousel = (state.currentCarousel + 1) % state.totalCarousels;
         },
-        prevSlide : (state , action) =>{
-            state.currentCarousel = action.payload < 0 ? state.totalCarousels : action.payload
+        prevSlide: (state) => {
+            state.currentCarousel = (state.currentCarousel - 1 + state.totalCarousels) % state.totalCarousels;
         },
-        dotSlide : () => {}
+        dotSlide: (state, action) => {
+            state.currentCarousel = action.payload;
+        }
     }
-})
+});
 
-export const {nextSlide , prevSlide , dotSlide} = carouselSlice.actions;
+export const { nextSlide, prevSlide, dotSlide } = carouselSlice.actions;
 export default carouselSlice.reducer;
