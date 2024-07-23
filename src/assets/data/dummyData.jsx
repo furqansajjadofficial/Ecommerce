@@ -101,7 +101,7 @@ export const storeData = [
     color: ["black", "gray", "green"],
     gender: "male",
     price: 45,
-  },
+  }, 
   {
     id: "2",
     img: shirt2,
