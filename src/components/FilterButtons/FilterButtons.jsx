@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cloth from '../../assets/images/clothes.jpg'
+import Cloth from "../../assets/images/clothes.jpg";
 
 function FilterButtons() {
   const buttons = [
@@ -18,7 +18,7 @@ function FilterButtons() {
 
   return (
     <>
-      <div className="flex justify-center py-4 items-center">
+      <div className="flex justify-center py-4 items-center flex-wrap">
         {buttons.map((button, index) => (
           <button
             key={index}
@@ -34,7 +34,11 @@ function FilterButtons() {
         </h1>
       </div>
       <div className="text-center">
-        <img className="w-[90%] mx-auto h-[500px] my-5" src={Cloth} alt="Shirt" />
+        <img
+          className="w-[90%] mx-auto h-[500px] my-5"
+          src={Cloth}
+          alt="Shirt"
+        />
       </div>
     </>
   );
