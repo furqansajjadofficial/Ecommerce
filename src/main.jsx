@@ -4,7 +4,8 @@ import App from './App.jsx'
 import './index.css'
 import { Provider } from 'react-redux'
 import { store } from './app/store.js'
-import {Home} from './pages'
+import {Home } from './pages'
+import { Filteredproducts , Allcards } from './components/index.js'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,12 +15,22 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children : [
+    children: [
       {
-        path: '',
-        element : <Home />
-      }
-    ]
+        path: "",
+        element: <Home />, 
+        children: [
+          {
+            path : '',
+            element : <Allcards />
+          },
+          {
+            path: "/filteredProducts/:type",
+            element: <Filteredproducts />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 

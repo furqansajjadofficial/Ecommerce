@@ -3,10 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { sliderData } from "../../assets/data/dummyData";
 import { nextSlide, prevSlide, dotSlide } from "../../features/carouselSlice";
 import { FaArrowLeft , FaArrowRight } from "react-icons/fa";
+import { useId } from "react";
+import { nanoid } from "nanoid";
 
 function Carousel() {
   const currentSlide = useSelector((state) => state.carousel.currentCarousel);
   const dispatch = useDispatch();
+  const id = useId()
 
   const handleNext = () => {
     dispatch(nextSlide());
@@ -22,9 +25,9 @@ function Carousel() {
 
   return (
     <div className="relative pb-4">
-      {sliderData.map((item, index) => (
+      {sliderData.map((item) => (
         <div
-          key={item.id}
+          key={nanoid()}
           className={
             parseInt(item.id) === currentSlide
               ? "block duration-100 ease-in-out scale-100"
@@ -40,7 +43,7 @@ function Carousel() {
       <div className="absolute md:bottom-24 sm:bottom-24 bottom-[100px] left-1/2 transform -translate-x-1/2 flex space-x-2">
         {sliderData.map((_, index) => (
           <div
-            key={index}
+            key={nanoid()}
             onClick={() => handleDotClick(index)}
             className={
               currentSlide === index

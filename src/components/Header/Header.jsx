@@ -1,11 +1,13 @@
 import React, { useEffect} from "react";
-import { useState, useId } from "react";
+import { useState} from "react";
 import Logo from "../../assets/Logo.png";
 import Light from "../../assets/Light.png";
 import Dark from "../../assets/Dark.png";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../features/themeSlice";
 import { NavLink, Link } from "react-router-dom";
+import { nanoid } from "nanoid";
+
 
 function Header() {
   const [darkMode, setDarkMode] = useState(
@@ -14,7 +16,6 @@ function Header() {
     const [showManue , setshowManue] = useState(false)
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.logined);
-  const id = useId()
 
   const handleTheme = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
@@ -125,7 +126,7 @@ function Header() {
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {navItems.map((item , index) => (
-              <li key={index}>
+              <li key={nanoid()}>
                 <NavLink
                   to={item.slug}
                   className={({ isActive }) =>
@@ -150,7 +151,7 @@ function Header() {
             <>
             <li
               className="w-full"
-              key={index}
+              key={nanoid()}
             >
               <NavLink
                 to={item.slug}

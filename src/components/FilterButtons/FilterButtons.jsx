@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cloth from "../../assets/images/clothes.jpg";
+import { Link } from "react-router-dom";
+import { filter } from "../../features/filterSlice";
+import { useId } from "react";
+import { nanoid } from "nanoid";
+
 
 function FilterButtons() {
   const buttons = [
@@ -14,21 +19,25 @@ function FilterButtons() {
     "Jackets",
     "Bags",
   ];
+  
   const [discount, setDiscount] = useState("10");
+  const dispatch = useDispatch()
 
   return (
     <>
       <div className="flex justify-center py-4 items-center flex-wrap">
         {buttons.map((button, index) => (
-          <button
-            key={index}
-            className="mr-4 my-2 bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          >
-            {button}
-          </button>
+          <Link key={nanoid()} to={button  != "All"?`/filteredProducts/${button}` : '/'}>
+            <button
+              className="mr-4 my-2 bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => dispatch(filter(button))}
+            >
+              {button}
+            </button>
+          </Link>
         ))}
       </div>
-      <div className="dark:bg-gray-600 md:w-[50%] w-full mx-auto my-5 bg-gray-600 ">
+      <div className="dark:bg-gray-600 md:w-[50%] w-full mx-auto my-5 bg-gray-600">
         <h1 className="dark:text-red-800 text-center md:text-3xl text-xl text-red-800">
           Sales upto {Number(discount)}% Shop Now
         </h1>
