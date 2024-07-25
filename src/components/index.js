@@ -3,6 +3,8 @@ import Carousel from "./Carousel/Carousel";
 import FilterButtons from "./FilterButtons/FilterButtons";
 import Filteredproducts from "./Filteredproducts/Filteredproducts";
 import Allcards from "./Filteredproducts/Allcards";
+import Cart from "./Cart/Cart";
+import Productpage from "./Product/Productpage";
 
 
 export{
@@ -10,5 +12,7 @@ export{
     Carousel,
     FilterButtons,
     Filteredproducts,
-    Allcards
+    Allcards,
+    Cart,
+    Productpage
 }

@@ -40,7 +40,7 @@ function Carousel() {
           </div>
         </div>
       ))}
-      <div className="absolute md:bottom-24 sm:bottom-24 bottom-[100px] left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="hidden sm:flex absolute md:bottom-24 sm:bottom-24 bottom-[100px] left-1/2 transform -translate-x-1/2 md:flex space-x-2">
         {sliderData.map((_, index) => (
           <div
             key={nanoid()}

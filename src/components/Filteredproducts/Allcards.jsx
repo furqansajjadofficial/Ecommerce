@@ -2,10 +2,20 @@ import React, { useState } from "react";
 import { storeData } from "../../assets/data/dummyData";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { nanoid } from "nanoid";
+import { useDispatch , useSelector } from "react-redux";
+import { addToCart } from "../../features/cartSlice";
+import { Link } from "react-router-dom";
+import { updateDetails} from "../../features/productSlice";
 
 const Allcards = () => {
+  const dispatch = useDispatch()
+  const isRegistered = useSelector((state) => state.auth.logined)
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 16;
+
+  const truncateText = (text, maxLength) => {
+    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+  };
 
   const handleNext = () => {
     const totalPages = Math.ceil(storeData.length / cardsPerPage);
@@ -25,23 +35,38 @@ const Allcards = () => {
     currentPage * cardsPerPage
   );
 
+  const handleProductClick = (id) => {
+    dispatch(updateDetails(id))
+  }
+
+  const handleProduct = (product) => {
+    if(isRegistered){
+      dispatch(addToCart(product))
+    } else {
+      alert("Please Login First")
+    }
+  }
+  
+
   return (
     <div className="flex justify-center gap-1 w-full mx-auto  flex-wrap">
       {displayedCards.map((item) => (
         <div key={nanoid()} className="md:w-1/3 lg:w-1/4 xl:w-1/5 my-2  mx-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <a href="#">
+          <Link to={`/${item.type}/details`}>
             <LazyLoadImage
               className="p-8 rounded-t-lg"
               src={item.img}
               alt="product image"
+              onClick={() => handleProductClick(item.id)}
             />
-          </a>
+          </Link>
           <div className="px-5 pb-5">
-            <a href="#">
+            <Link to={`/${item.type}/details`}
+             onClick={() => handleProductClick(item.id)}>
               <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                {item.text}
+                {truncateText(item.text, Math.floor(Math.random() * 40))}
               </h5>
-            </a>
+            </Link>
             <div className="flex items-center mt-2.5 mb-5">
               <div className="flex items-center space-x-1 rtl:space-x-reverse">
                 <svg
@@ -98,12 +123,12 @@ const Allcards = () => {
               <span className="text-3xl font-bold text-gray-900 dark:text-white">
                 {item.price}
               </span>
-              <a
-                href="#"
+              <button
                 className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                onClick={() => handleProduct(item)}
               >
                 Add to cart
-              </a>
+              </button>
             </div>
           </div>
         </div>

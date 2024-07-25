@@ -1,5 +1,5 @@
-import React, { useEffect} from "react";
-import { useState} from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import Logo from "../../assets/Logo.png";
 import Light from "../../assets/Light.png";
 import Dark from "../../assets/Dark.png";
@@ -8,30 +8,28 @@ import { toggleTheme } from "../../features/themeSlice";
 import { NavLink, Link } from "react-router-dom";
 import { nanoid } from "nanoid";
 
-
 function Header() {
   const [darkMode, setDarkMode] = useState(
     useSelector((state) => state.theme.darkMode)
-    );
-    const [showManue , setshowManue] = useState(false)
+  );
+  const [showManue, setshowManue] = useState(false);
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.logined);
+  const userData = useSelector((state) => state.auth.userData);
 
   const handleTheme = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
   const toggleManue = () => {
-    setshowManue(!showManue)
-    if(showManue){
-      document.getElementById('mobile-manue').classList.remove('hidden');
-      document.getElementById('mobile-manue').classList.add('inline-block');
+    setshowManue(!showManue);
+    if (showManue) {
+      document.getElementById("mobile-manue").classList.remove("hidden");
+      document.getElementById("mobile-manue").classList.add("inline-block");
+    } else {
+      document.getElementById("mobile-manue").classList.remove("inline-block");
+      document.getElementById("mobile-manue").classList.add("hidden");
     }
-    else{
-      document.getElementById('mobile-manue').classList.remove('inline-block');
-      document.getElementById('mobile-manue').classList.add('hidden');
-    }
-  }
-  
+  };
 
   useEffect(() => {
     document.querySelector("html").classList.remove("light", "dark");
@@ -60,18 +58,28 @@ function Header() {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src={Logo} className="h-8" alt="Flowbite Logo" />
-          <span className="self-center md:text-2xl text-lg font-semibold whitespace-nowrap dark:text-white">
+          <span className="self-center md:text-2xl sm:text-lg text-sm font-semibold whitespace-nowrap dark:text-white">
             Universal Finds Hub
           </span>
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
           {authStatus ? (
-            <button
-              type="button"
-              className="text-white hidden md:inline-block bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-            >
-              Logout
-            </button>
+            <>
+              <Link to={`/${userData.user_name || "anonymous"}/cart`}>
+                <button
+                  type="button"
+                  className="text-red-600 hidden md:inline-block focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center  dark:focus:ring-red-800"
+                >
+                  Your Cart
+                </button>
+              </Link>
+              <button
+                type="button"
+                className="text-white hidden md:inline-block bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <button
@@ -125,7 +133,7 @@ function Header() {
           id="navbar-sticky"
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            {navItems.map((item , index) => (
+            {navItems.map((item, index) => (
               <li key={nanoid()}>
                 <NavLink
                   to={item.slug}
@@ -147,35 +155,47 @@ function Header() {
         className="w-full hidden md:hidden bg-white dark:bg-gray-900"
       >
         <ul className="flex flex-col gap-2">
-          {navItems.map((item , index) => (
+          {navItems.map((item, index) => (
             <>
-            <li
-              className="w-full"
-              key={nanoid()}
-            >
-              <NavLink
-                to={item.slug}
-                className={({ isActive }) =>
-                  `block py-2 px-3 rounded hover:bg-gray-100 ${
-                    isActive
-                      ? "text-red-600 dark:text-red-800 dark:hover:text-white dark:hover:bg-gray-700"
-                      : "text-gray-900 dark:text-white dark:hover:text-white dark:hover:bg-gray-700"
-                  }`
-                }
-              >
-                {item.name}
-              </NavLink>
-            </li>
+              <li className="w-full" key={nanoid()}>
+                <NavLink
+                  to={item.slug}
+                  className={({ isActive }) =>
+                    `block py-2 px-3 rounded hover:bg-gray-100 ${
+                      isActive
+                        ? "text-red-600 dark:text-red-800 dark:hover:text-white dark:hover:bg-gray-700"
+                        : "text-gray-900 dark:text-white dark:hover:text-white dark:hover:bg-gray-700"
+                    }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
+              </li>
             </>
           ))}
-          <button className="text-white text-xl bg-blue-800 w-16 rounded-md" onClick={handleTheme}>{darkMode ? 'Light' : 'Dark'}</button>
+          <button
+            className="text-white text-xl bg-blue-800 w-16 rounded-md"
+            onClick={handleTheme}
+          >
+            {darkMode ? "Light" : "Dark"}
+          </button>
           {authStatus ? (
-            <button
-              type="button"
-              className={`text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
-            >
-              Logout
-            </button>
+            <>
+              <Link to={`/${userData.user_name || "anonymous"}/cart`}>
+              <button
+                type="button"
+                className={`my-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
+              >
+                Your Cart
+              </button>
+              </Link>
+              <button
+                type="button"
+                className={`text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <button
