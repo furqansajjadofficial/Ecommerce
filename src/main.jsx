@@ -4,8 +4,8 @@ import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
-import { Home } from "./pages";
-import { Filteredproducts, Allcards, Cart, Productpage } from "./components/index.js";
+import { Home , Productpage  } from "./pages";
+import { Filteredproducts, Allcards, Cart , Login} from "./components/index.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -36,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: '/:product/details',
     element: <Productpage/>
+  },
+  {
+    path : '/login',
+    element : <Login />
   }
 ]);
 

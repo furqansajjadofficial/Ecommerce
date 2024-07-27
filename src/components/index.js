@@ -4,7 +4,7 @@ import FilterButtons from "./FilterButtons/FilterButtons";
 import Filteredproducts from "./Filteredproducts/Filteredproducts";
 import Allcards from "./Filteredproducts/Allcards";
 import Cart from "./Cart/Cart";
-import Productpage from "./Product/Productpage";
+import Login from "./Login/Login";
 
 
 export{
@@ -14,5 +14,5 @@ export{
     Filteredproducts,
     Allcards,
     Cart,
-    Productpage
+    Login
 }

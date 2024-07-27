@@ -56,12 +56,12 @@ function Header() {
   return (
     <nav className="bg-white dark:bg-gray-900  w-full  start-0 border-b-2 border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src={Logo} className="h-8" alt="Flowbite Logo" />
           <span className="self-center md:text-2xl sm:text-lg text-sm font-semibold whitespace-nowrap dark:text-white">
             Universal Finds Hub
           </span>
-        </a>
+        </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
           {authStatus ? (
             <>
@@ -82,12 +82,14 @@ function Header() {
             </>
           ) : (
             <>
-              <button
-                type="button"
-                className="dark:text-white hidden md:inline-block  hover:bg-red-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:hover:bg-red-700 dark:focus:ring-red-800"
-              >
-                Login
-              </button>
+              <Link to="/login">
+                <button
+                  type="button"
+                  className="dark:text-white hidden md:inline-block  hover:bg-red-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:hover:bg-red-700 dark:focus:ring-red-800"
+                >
+                  Login
+                </button>
+              </Link>
               <button
                 type="button"
                 className="text-white hidden md:inline-block bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
@@ -182,12 +184,12 @@ function Header() {
           {authStatus ? (
             <>
               <Link to={`/${userData.user_name || "anonymous"}/cart`}>
-              <button
-                type="button"
-                className={`my-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
-              >
-                Your Cart
-              </button>
+                <button
+                  type="button"
+                  className={`my-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
+                >
+                  Your Cart
+                </button>
               </Link>
               <button
                 type="button"
@@ -198,12 +200,14 @@ function Header() {
             </>
           ) : (
             <>
+            <Link to='/login'>
               <button
                 type="button"
                 className={`dark:text-white bg-transparent hover:bg-red-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:hover:bg-red-700 dark:focus:ring-red-800`}
               >
                 Login
               </button>
+              </Link>
               <button
                 type="button"
                 className={`text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
