@@ -24,7 +24,7 @@ function Carousel() {
   };
 
   return (
-    <div className="relative pb-4">
+    <div className="relative pb-4 z-0">
       {sliderData.map((item) => (
         <div
           key={nanoid()}

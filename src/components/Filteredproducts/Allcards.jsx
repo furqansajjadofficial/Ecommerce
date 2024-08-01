@@ -52,7 +52,7 @@ const Allcards = () => {
     <div className="flex justify-center gap-1 w-full mx-auto  flex-wrap">
       {displayedCards.map((item) => (
         <div key={nanoid()} className="md:w-1/3 lg:w-1/4 xl:w-1/5 my-2  mx-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <Link to={`/${item.type}/details`}>
+          <Link to={`/${item.id}/details`}>
             <LazyLoadImage
               className="p-8 rounded-t-lg"
               src={item.img}
@@ -61,7 +61,7 @@ const Allcards = () => {
             />
           </Link>
           <div className="px-5 pb-5">
-            <Link to={`/${item.type}/details`}
+            <Link to={`/${item.id}/details`}
              onClick={() => handleProductClick(item.id)}>
               <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 {truncateText(item.text, Math.floor(Math.random() * 40))}

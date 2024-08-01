@@ -5,6 +5,7 @@ import Filteredproducts from "./Filteredproducts/Filteredproducts";
 import Allcards from "./Filteredproducts/Allcards";
 import Cart from "./Cart/Cart";
 import Login from "./Login/Login";
+import Payment from "./Payment/Payment";
 
 
 export{
@@ -14,5 +15,6 @@ export{
     Filteredproducts,
     Allcards,
     Cart,
-    Login
+    Login,
+    Payment
 }

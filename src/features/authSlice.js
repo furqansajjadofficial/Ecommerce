@@ -1,6 +1,4 @@
-// Inside a React functional component
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
 
 const authSlice = createSlice({
     name: "auth",
@@ -11,8 +9,9 @@ const authSlice = createSlice({
             email: '',
             number: '',
             cart: [], 
-            buyer: true,
             seller: false,
+            BuyedProducts : [],
+            selledProducts : [],
             paymentData: {
                 verified: false,
                 details: {}
@@ -22,9 +21,11 @@ const authSlice = createSlice({
     reducers: {
         login: (state, action) => {
             state.logined = true;
-            state.userData = action.payload.userData;
+            state.userData = action.payload;
+            console.log(state.userData);
         },
         logout: (state) => {
+            console.log('render');
             state.logined = false;
             state.userData = {
                 name: '',
@@ -42,6 +43,6 @@ const authSlice = createSlice({
     }
 });
 
-export const { login, logout } = authSlice.actions;
 
-export default authSlice.reducer;
+export const { login , logout} = authSlice.actions;
+export default authSlice.reducer

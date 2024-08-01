@@ -4,6 +4,7 @@ import { useSelector , useDispatch } from "react-redux";
 import { useEffect, useId , useState } from "react";
 import { addToCart, decreaseQuantity, removeItem } from "../../features/cartSlice";
 import { nanoid } from "@reduxjs/toolkit";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const firstRandomItem = storeData[Math.floor(Math.random() * 62) + 1];
@@ -12,7 +13,7 @@ const Cart = () => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   
-  const repeatedItem = cartItems.filter((item) => item.quantity > 1);
+  const repeatedItem = useSelector((state) => state.cart.reapeatedItems);
   const dispatch = useDispatch();
 
   const handleDecrease = (item) => {
@@ -474,7 +475,7 @@ const Cart = () => {
                       </dt>
                       <dd className="text-base font-medium text-green-600">
                       {
-                          useSelector((state) => state.cart.totalItems)
+                          useSelector((state) => state.cart.totalItems) + repeatedItem.length
                         }
                       </dd>
                     </dl>
@@ -526,10 +527,10 @@ const Cart = () => {
                     {" "}
                     or{" "}
                   </span>
-                  <a
-                    href="#"
+                  <Link
+                    to='/'
                     title=""
-                    className="inline-flex items-center gap-2 text-sm font-medium text-primary-700 underline hover:no-underline dark:text-primary-500"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-red-700 underline hover:no-underline dark:text-red-500"
                   >
                     Continue Shopping
                     <svg
@@ -547,7 +548,7 @@ const Cart = () => {
                         d="M19 12H5m14 0-4 4m4-4-4-4"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
